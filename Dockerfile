@@ -1,17 +1,17 @@
-FROM httpd:latest
 FROM node:latest
 
-    WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
-    LABEL maintainer="J.Arcos"
-    RUN  apt update
-    RUN apt install -y git
-    RUN apt install -y nodejs
+LABEL maintainer="J.Arcos"
 
-    RUN git clone https://github.com/josearcos2023/SN_Semana04.git .
+RUN apt-get update && apt-get install -y apache2 git
 
-    RUN npm install > /dev/null
+RUN git clone https://github.com/josearcos2023/SN_S04_Arcos.git . || true  
+RUN ls -la  
 
-    EXPOSE 12401
+RUN npm install
 
-    CMD ["node", "/index.js"]
+EXPOSE 80
+EXPOSE 12401
+
+CMD ["node", "index.js"]
